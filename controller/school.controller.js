@@ -49,3 +49,18 @@ export const fetchSchool = async (req, res) => {
         })
     }
 }
+export const updateSchool = async (req, res) => {
+    try{
+        const school = await SchoolModel.findByIdAndUpdate(req.school._id, req.body, {new: true}).lean();
+        if(!school)
+            return res.status(404).json({message: "User not found"});
+        delete school.password;
+        res.json({message: "Update successful", school});
+    }
+    catch(err)
+    {
+        res.status(500).json({
+            message: err.message
+        })
+    }
+}
