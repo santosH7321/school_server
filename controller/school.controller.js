@@ -37,3 +37,15 @@ export const login = async (req, res) => {
     }
 }
 
+export const fetchSchool = async (req, res) => {
+    try{
+        const school = await SchoolModel.findById(req.school._id, {password: 0})
+        res.json(school);
+    }
+    catch(err)
+    {
+        res.status(500).json({
+            message: err.message
+        })
+    }
+}
