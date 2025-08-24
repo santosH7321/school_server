@@ -1,7 +1,8 @@
 import { Router } from "express";
-import { createSchool } from "../controller/school.controller.js";
+import { login, signup } from "../controller/school.controller.js";
 
 const SchoolRouter = Router();
 
-SchoolRouter.post("/signup", createSchool);
+SchoolRouter.post("/signup", signup);
+SchoolRouter.post("/login", login);
 export default SchoolRouter;
