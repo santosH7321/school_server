@@ -64,3 +64,16 @@ export const updateSchool = async (req, res) => {
         })
     }
 }
+export const uploadImage = async (req, res) => {
+    try {
+        await SchoolModel.findByIdAndUpdate(req.school._id, {image: req.file.path});
+        res.json({message: "Image uploaded successfully", imagePath: req.file.path});
+        
+    }   
+    catch(err)
+    {
+        res.status(500).json({
+            message: err.message
+        })
+    }
+}
