@@ -1,6 +1,7 @@
 import SchoolModel from "../model/school.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import path from "path";
 
 export const signup = async (req, res) => {
     try {
@@ -68,8 +69,26 @@ export const uploadImage = async (req, res) => {
     try {
         await SchoolModel.findByIdAndUpdate(req.school._id, {image: req.file.path});
         res.json({message: "Image uploaded successfully", imagePath: req.file.path});
-        
+
     }   
+    catch(err)
+    {
+        res.status(500).json({
+            message: err.message
+        })
+    }
+}
+
+export const fetchImage = async (req, res) => {
+    try {
+        await SchoolModel.findById(req.school._id, {image: 1, _id: 0}).lean().then((data) => {
+            if(!data || !data.image)
+                return res.status(404).json({message: "Image not found"});
+            const root = process.cwd();
+            const fullUrl = path.join(root, data.image);
+            res.sendFile(fullUrl);
+        });
+    } 
     catch(err)
     {
         res.status(500).json({
