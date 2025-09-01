@@ -1,4 +1,5 @@
 import TeacherModel from "../model/teacher.model.js";
+import path from "path";
 
 export const createTeachers = async (req, res) => {
     try {
@@ -57,3 +58,15 @@ export const uploadTeacherImages = async (req, res) => {
     }
 }
 
+export const fetchTeacherImage = async(req, res) => {
+    try {
+        const {image} = await TeacherModel.findById(req.params.id, {image: 1});
+        const root = process.cwd();
+        const fullUrl = path.join(root, image);
+        res.sendFile(fullUrl);
+    } catch (error) {
+        res.status(500).json({
+            message: error.message,
+        })
+    }
+}
