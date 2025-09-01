@@ -11,6 +11,7 @@ const storage = multer.diskStorage({
         cb(null, `${Date.now()}.png`)
     }
 })
+const upload = multer({storage: storage});
 
 const TeacherRouter = Router();
 
