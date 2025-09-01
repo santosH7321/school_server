@@ -62,6 +62,9 @@ const teacherSchema = new Schema(
     ],
     previousSchool: {
         type: String,
+    },
+    image: {
+        type: String,
     }
   },
   { timestamps: true }

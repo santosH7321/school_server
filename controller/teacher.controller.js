@@ -45,3 +45,15 @@ export const deleteTeachers = async (req, res) => {
     }
 }
 
+
+export const uploadTeacherImages = async (req, res) => {
+    try {
+        await TeacherModel.findByIdAndUpdate(req.params.id, {image: req.file.path});
+        res.json({message: "Upload success"})
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        })
+    }
+}
+
