@@ -50,6 +50,7 @@ export const fetchSchool = async (req, res) => {
         })
     }
 }
+
 export const updateSchool = async (req, res) => {
     try{
         const school = await SchoolModel.findByIdAndUpdate(req.school._id, req.body, {new: true}).lean();
@@ -65,6 +66,7 @@ export const updateSchool = async (req, res) => {
         })
     }
 }
+
 export const uploadImage = async (req, res) => {
     try {
         await SchoolModel.findByIdAndUpdate(req.school._id, {image: req.file.path});
@@ -96,3 +98,4 @@ export const fetchImage = async (req, res) => {
         })
     }
 }
+
