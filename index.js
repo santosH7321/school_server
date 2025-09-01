@@ -6,6 +6,7 @@ dotenv.config();
 import mongoose from "mongoose";
 import SchoolRouter from "./router/school.router.js";
 import SubjectRouter from "./router/subject.router.js";
+import TeacherRouter from "./router/teacher.router.js";
 
 mongoose
   .connect(process.env.DB)
@@ -25,3 +26,4 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/school", SchoolRouter);
 app.use("/subject", SubjectRouter);
+app.use("/teacher", TeacherRouter);
